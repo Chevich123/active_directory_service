@@ -17,7 +17,7 @@ module ActiveDirectoryService
 
     def ldap_entry(fields = nil)
       treebase = ldap_config['base']
-      filter = Net::LDAP::Filter.eq(ssl_version['attribute'], username)
+      filter = Net::LDAP::Filter.eq(ldap_config['attribute'], username)
       attrs = fields || %w[mail givenName sn]
       params = {
         base: treebase,
