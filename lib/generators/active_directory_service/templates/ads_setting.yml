@@ -2,7 +2,7 @@
 commons: &commons
   host: localhost
   basic_port: 389
-  ssl_port: 389
+  ssl_port: 636
   attribute: cn
   ca_file_path: /etc/ssl/certs/corpRootCa.cer
   verify_certificate: false

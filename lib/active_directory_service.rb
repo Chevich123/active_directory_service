@@ -10,5 +10,6 @@ module ActiveDirectoryService
 
   def self.setup
     yield self
+    p "ldap_config = #{ldap_config}"
   end
 end
