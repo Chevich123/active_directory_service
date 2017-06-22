@@ -4,12 +4,17 @@ require 'active_directory_service/service'
 module ActiveDirectoryService
   # A path to YAML config file or a Proc that returns a
   # configuration hash
-  mattr_accessor :ldap_config
-  @@ldap_config = "#{Rails.root}/config/ldap.yml"
+  mattr_accessor :ldap_config_path
+  @@ldap_config_path = "#{Rails.root}/config/ads_setting.yml"
 
+  mattr_accessor :ldap_config_path
 
   def self.setup
     yield self
-    p "ldap_config = #{ldap_config}"
+    p "ldap_config = #{ldap_config_path}"
+
+    @@ldap_config = YAML.load_file(Rails.root.join(ldap_config_path))
+
+    p @@ldap_config
   end
 end
