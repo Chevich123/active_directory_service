@@ -1,0 +1,58 @@
+inherit_from: .rubocop_todo.yml
+
+Rails:
+  Enabled: true
+
+AllCops:
+  DisplayCopNames: true
+  Include:
+    - Rakefile
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 160
+
+Metrics/BlockNesting:
+  Max: 4
+
+Style/AsciiComments:
+  Enabled: false
+
+CaseIndentation:
+  EnforcedStyle: case
+  IndentOneStep: true
+
+Metrics/ClassLength:
+  Max: 410
+
+Metrics/ModuleLength:
+  Max: 250
+
+Metrics/MethodLength:
+  Max: 103
+
+Metrics/BlockLength:
+  Max: 35
+  ExcludedMethods:
+    - "describe"
+    - "context"
+    - "it"
+    - "xit"
+    - "Fabricator"
+    - "namespace"
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'spec/**/*'
+
+Style/FileName:
+  Exclude:
+    - 'Gemfile'

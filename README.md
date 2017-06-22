@@ -1,8 +1,7 @@
 # ActiveDirectoryService
-Short description and motivation.
+There are no easy method to make simple authority through Active Directory with archiving user's entity for prepopulating empty/new user and to modify user's password 
 
 ## Usage
-How to use my plugin.
 
 ## Installation
 Add this line to your application's Gemfile:
