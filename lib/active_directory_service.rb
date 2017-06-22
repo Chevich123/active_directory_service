@@ -13,7 +13,7 @@ module ActiveDirectoryService
     yield self
     p "ldap_config = #{ldap_config_path}"
 
-    @@ldap_config = YAML.load_file(Rails.root.join(ldap_config_path))
+    @@ldap_config = YAML.load_file(Rails.root.join(ldap_config_path))[Rails.env]
 
     p @@ldap_config
   end
