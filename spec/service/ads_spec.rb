@@ -1,8 +1,9 @@
-require 'active_directory_service/service'
+require 'spec_helper'
 
 RSpec.describe ActiveDirectoryService do
+  subject { ActiveDirectoryService::Service.new('username', 'password') }
+
   it 'should exists' do
-    game = ActiveDirectoryService::Service.new('username', 'password')
-    expect(game).to_not be_nil
+    expect(subject).to_not be_nil
   end
 end

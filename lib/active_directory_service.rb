@@ -1,6 +1,15 @@
 require 'net/ldap'
-# require '../active_directory_service/service'
+require 'active_directory_service/version'
+require 'active_directory_service/service'
 
 module ActiveDirectoryService
-  # Your code goes here...
+  # A path to YAML config file or a Proc that returns a
+  # configuration hash
+  mattr_accessor :ldap_config
+  @@ldap_config = "#{Rails.root}/config/ldap.yml"
+
+
+  def self.setup
+    yield self
+  end
 end

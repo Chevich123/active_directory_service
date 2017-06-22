@@ -1,0 +1,22 @@
+## Commons block
+commons: &commons
+  host: localhost
+  basic_port: 389
+  ssl_port: 389
+  attribute: cn
+  ca_file_path: /etc/ssl/certs/corpRootCa.cer
+  verify_certificate: false
+  ssl_version: TLSv1_1
+  base: ou=people,dc=test,dc=com
+  ssl: false
+
+## Environments
+
+development:
+  <<: *commons
+
+test:
+  <<: *commons
+
+production:
+  <<: *commons
