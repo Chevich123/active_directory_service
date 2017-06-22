@@ -12,7 +12,7 @@ module ActiveDirectoryService
     end
 
     def error_message
-      result.present? ? result.error_message : nil
+      ldap.get_operation_result
     end
 
     def ldap_entry(fields = nil)
@@ -46,8 +46,7 @@ module ActiveDirectoryService
         [:delete, :unicodePwd, [old_pass]],
         [:add, :unicodePwd, [new_pass]]
       ]
-      self.result = ldap.modify(dn: dn, operations: ops)
-      result.success?
+      ldap.modify(dn: dn, operations: ops)
     end
 
     private
@@ -91,7 +90,3 @@ module ActiveDirectoryService
     end
   end
 end
-
-# 
-# ar#112233
-# AR#it62dfg

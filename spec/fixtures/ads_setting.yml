@@ -1,9 +1,9 @@
 host: 127.0.0.1
-basic_port: 389
-ssl_port: 636
-attribute: cn
-ca_file_path: /etc/ssl/certs/corpRootCa.cer
+basic_port: 401
+ssl_port: 404
+attribute: cnt
+ca_file_path: /corpRootCa.cer
 verify_certificate: false
-ssl_version: TLSv1_1
+ssl_version: TLSv1_2
 base: ou=people,dc=test,dc=com
-ssl: false
+ssl: true
