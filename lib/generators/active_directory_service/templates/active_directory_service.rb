@@ -1,5 +1,6 @@
 ActiveDirectoryService.setup do |config|
   # put here any custom config params
+  config.ldap_config_path = "#{Rails.root}/config/ads_setting.yml"
 
 end
 
