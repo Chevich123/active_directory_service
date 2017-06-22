@@ -1,0 +1,3 @@
+module ActiveDirectoryService
+  # Your code goes here...
+end
