@@ -5,7 +5,7 @@ module ActiveDirectoryService
   # A path to YAML config file or a Proc that returns a
   # configuration hash
   mattr_accessor :ldap_config_path
-  @@ldap_config_path = "#{Rails.root}/config/ads_setting.yml"
+  @@ldap_config_path = Rails.root.join("config","ads_setting.yml")
 
   mattr_accessor :ldap_config_path
 
