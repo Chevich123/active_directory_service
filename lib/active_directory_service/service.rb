@@ -35,6 +35,21 @@ module ActiveDirectoryService
       ldap.bind
     end
 
+    def change_ldap_password(new_password)
+      old_pass = microsoft_encode_password(password)
+      new_pass = microsoft_encode_password(new_password)
+
+      # ops = [
+      #   [:replace, :unicodePwd, [old_pass, new_pass]],
+      # ]
+      ops = [
+        [:delete, :unicodePwd, [old_pass]],
+        [:add, :unicodePwd, [new_pass]]
+      ]
+      self.result = ldap.modify(dn: dn, operations: ops)
+      result.success?
+    end
+
     private
 
     def ldap
@@ -68,21 +83,6 @@ module ActiveDirectoryService
       end
     end
 
-    def change_ldap_password(new_password)
-      old_pass = microsoft_encode_password(password)
-      new_pass = microsoft_encode_password(new_password)
-
-      # ops = [
-      #   [:replace, :unicodePwd, [old_pass, new_pass]],
-      # ]
-      ops = [
-        [:delete, :unicodePwd, [old_pass]],
-        [:add, :unicodePwd, [new_pass]]
-      ]
-      self.result = ldap.modify(dn: dn, operations: ops)
-      result.success?
-    end
-
     def microsoft_encode_password(pwd)
       ret = ''
       pwd = '"' + pwd + '"'
@@ -91,3 +91,7 @@ module ActiveDirectoryService
     end
   end
 end
+
+
+ar#112233
+AR#it62dfg
