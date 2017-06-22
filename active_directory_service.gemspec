@@ -11,10 +11,11 @@ Gem::Specification.new do |s|
   s.email       = ['andrey.rogachevich@azati.com']
   s.homepage    = 'https://github.com/Chevich123/active_directory_service'
   s.summary     = "Allow to check credentials with ActiveDirectory, to archive entity and to change user's password in Active Directory"
-  s.description = "Allow to check credentials with ActiveDirectory, to archive entity and to change user's password in Active Directory"
+  s.description = s.summary
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
 
   s.add_dependency 'net-ldap'
 
