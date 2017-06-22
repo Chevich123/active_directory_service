@@ -1,8 +1,10 @@
 module ActiveDirectoryService
   class Service
     attr_accessor :username, :password, :ssl, :result
+    attr_accessor :ldap_config
 
     def initialize(username, password, ssl = false)
+      self.ldap_config = ActiveDirectoryService.ldap_config
       self.result = nil
       self.username = username
       self.password = password
@@ -14,8 +16,8 @@ module ActiveDirectoryService
     end
 
     def ldap_entry(fields = nil)
-      treebase = 'ou=ssousers,dc=corp,dc=itibo,dc=com'
-      filter = Net::LDAP::Filter.eq('cn', username)
+      treebase = ldap_config['base']
+      filter = Net::LDAP::Filter.eq(ssl_version['attribute'], username)
       attrs = fields || %w[mail givenName sn]
       params = {
         base: treebase,
@@ -40,13 +42,13 @@ module ActiveDirectoryService
     end
 
     def dn
-      "cn=#{username},ou=ssousers,dc=corp,dc=itibo,dc=com"
+      "#{ldap_config['attribute']}=#{username},#{ldap_config['base']}"
     end
 
     def compose_ldap
       Net::LDAP.new(connection_params).tap do |ldap|
-        ldap.host = 'corp.itibo.com'
-        ldap.port = ssl ? 636 : 389
+        ldap.host = ldap_config['host']
+        ldap.port = ssl ? ldap_config['ssl_port'] : ldap_config['basic_port']
         ldap.auth(dn, password)
       end
     end
@@ -56,9 +58,9 @@ module ActiveDirectoryService
         {
           encryption: {
             method: :simple_tls,
-            tls_options: { ca_file: '/etc/ssl/certs/corpRootCa.cer',
-                           verify_mode: OpenSSL::SSL::VERIFY_NONE,
-                           ssl_version: 'TLSv1_1' }
+            tls_options: { ca_file: ldap_config['ca_file_path'],
+                           verify_mode: ldap_config['verify_certificate'] ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE,
+                           ssl_version: ldap_config['ssl_version'] }
           }
         }
       else

@@ -15,9 +15,10 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
 
   s.add_dependency 'net-ldap'
+  s.add_dependency 'activesupport'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'

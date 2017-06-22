@@ -1,7 +1,6 @@
 ActiveDirectoryService.setup do |config|
   # put here any custom config params
-  config.ldap_config_path = "#{Rails.root}/config/ads_setting.yml"
-
+  config.ldap_config = YAML.load_file(Rails.root.join('config', 'ads_setting.yml'))[Rails.env]
 end
 
 # modify should return more parseable answer not just boolean result
